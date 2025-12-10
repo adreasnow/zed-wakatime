@@ -11,9 +11,8 @@ struct WakatimeExtension {
 }
 
 fn is_absolute_path_wasm(path: &PathBuf) -> bool {
-    let path_str = match path.to_str() {
-        Some(s) => s,
-        None => return false,
+    let Some(path_str) = path.to_str() else {
+        return false;
     };
 
     match zed::current_platform().0 {
